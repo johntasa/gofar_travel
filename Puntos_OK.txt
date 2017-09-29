@@ -1,0 +1,40 @@
+2- 
+a.
+--TABLESPACE hospital_bills
+CREATE TABLESPACE hospital_bills DATAFILE 
+'C:\Users\user\Desktop\Taller1\datafile1.DBF' SIZE 342M,
+'C:\Users\user\Desktop\Taller1\datafile2.DBF' SIZE 341M,
+'C:\Users\user\Desktop\Taller1\datafile3.DBF' SIZE 341M;
+
+b.
+--TABLESPACE test_purposes
+CREATE TABLESPACE test_purposes DATAFILE 
+'C:\Users\user\Desktop\Taller1\datafile4.DBF' SIZE 500M;
+
+c.
+--UNDO TABLESPACE
+CREATE UNDO TABLESPACE UNDOTBSPACE DATAFILE 
+'C:\Users\user\Desktop\Taller1\undotbspace1.DBF' SIZE 5M;
+
+--Consultar TABLESPACES
+SELECT * FROM SYS.DBA_TABLESPACES;
+
+
+3-
+--Modifica el TABLESPACE para usarlo en SYSTEM
+ALTER SYSTEM SET UNDO_TABLESPACE = UNDOTBSPACE;
+
+
+4-
+CREATE USER DBA_JOHNTASA
+IDENTIFIED BY johntasa
+DEFAULT TABLESPACE hospital_bills
+QUOTA unlimited on hospital_bills
+
+--Consultar usuarios
+SELECT * FROM SYS.DBA_USERS;
+
+
+5-
+GRANT DBA TO DBA_JOHNTASA;
+GRANT CREATE SESSION TO DBA_JOHNTASA;
