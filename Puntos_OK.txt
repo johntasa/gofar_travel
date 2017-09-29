@@ -1,17 +1,18 @@
-2- 
-a.
+2- Create 3 Tablespaces:
+
+a. first one with 1 Gb and 3 datafiles, tablespace should be named "hospital_bills"
 --TABLESPACE hospital_bills
 CREATE TABLESPACE hospital_bills DATAFILE 
 'C:\Users\user\Desktop\Taller1\datafile1.DBF' SIZE 342M,
 'C:\Users\user\Desktop\Taller1\datafile2.DBF' SIZE 341M,
 'C:\Users\user\Desktop\Taller1\datafile3.DBF' SIZE 341M;
 
-b.
+b. second one with 500 Mb and 1 datafile, named "test_purposes"
 --TABLESPACE test_purposes
 CREATE TABLESPACE test_purposes DATAFILE 
 'C:\Users\user\Desktop\Taller1\datafile4.DBF' SIZE 500M;
 
-c.
+c. Undo tablespace with 5Mb of space and 1 datafile
 --UNDO TABLESPACE
 CREATE UNDO TABLESPACE UNDOTBSPACE DATAFILE 
 'C:\Users\user\Desktop\Taller1\undotbspace1.DBF' SIZE 5M;
@@ -20,12 +21,13 @@ CREATE UNDO TABLESPACE UNDOTBSPACE DATAFILE
 SELECT * FROM SYS.DBA_TABLESPACES;
 
 
-3-
+3- Set the undo tablespace to be used in the system
 --Modifica el TABLESPACE para usarlo en SYSTEM
 ALTER SYSTEM SET UNDO_TABLESPACE = UNDOTBSPACE;
 
 
-4-
+4- Create a DBA user and assign it to the tablespace called "hospital_bills", 
+   this user has unlimited space on the tablespace
 CREATE USER DBA_JOHNTASA
 IDENTIFIED BY johntasa
 DEFAULT TABLESPACE hospital_bills
@@ -35,6 +37,6 @@ QUOTA unlimited on hospital_bills
 SELECT * FROM SYS.DBA_USERS;
 
 
-5-
+5- Assign the dba role and permissions to connect to the user just created
 GRANT DBA TO DBA_JOHNTASA;
 GRANT CREATE SESSION TO DBA_JOHNTASA;
