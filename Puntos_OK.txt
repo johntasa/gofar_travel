@@ -66,3 +66,38 @@ SESSIONS_PER_USER               2
 IDLE_TIME                       30
 FAILED_LOGIN_ATTEMPTS           UNLIMITED;
 
+7-
+--Consultar usuarios
+SELECT * FROM SYS.DBA_USERS;
+
+CREATE USER USER1
+IDENTIFIED BY user1
+DEFAULT tablespace hospital_bills
+PROFILE manager;
+
+CREATE USER USER2
+IDENTIFIED BY user2
+DEFAULT tablespace hospital_bills
+PROFILE finance;
+
+CREATE USER USER3
+IDENTIFIED BY user3
+DEFAULT tablespace hospital_bills
+PROFILE development;
+
+CREATE USER USER4
+IDENTIFIED BY user4
+DEFAULT tablespace hospital_bills
+PROFILE development;
+
+--all the users should be allow to connect to the database
+GRANT CREATE SESSION TO USER1, USER2, USER3, USER4;
+
+
+8-
+ALTER USER USER1 ACCOUNT LOCK;
+ALTER USER USER2 ACCOUNT LOCK;
+
+--Consultar usuarios
+SELECT * FROM SYS.DBA_USERS;
+
