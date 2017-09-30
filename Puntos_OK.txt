@@ -41,32 +41,39 @@ SELECT * FROM SYS.DBA_USERS;
 GRANT DBA TO DBA_JOHNTASA;
 GRANT CREATE SESSION TO DBA_JOHNTASA;
 
-6-
+
+6- Create 3 profiles:
 -- Consultar perfiles
 SELECT * FROM DBA_PROFILES;
 
-a-
+a. Profile 1: "manager" password life 40 days, one session per user,
+   15 minutes idle, 4 failed login attempts
 CREATE PROFILE manager LIMIT
 PASSWORD_LIFE_TIME              40
 SESSIONS_PER_USER               1
 IDLE_TIME                       15
 FAILED_LOGIN_ATTEMPTS           4;
 
-b-
+b. Profile 2: "finance" password life 15 days, one session per user,
+   3 minutes idle, 2 failed login attempts
 CREATE PROFILE finance LIMIT
 PASSWORD_LIFE_TIME              15
 SESSIONS_PER_USER               1
 IDLE_TIME                       3
 FAILED_LOGIN_ATTEMPTS           2;
 
-c-
+c. Profile 3: "development" password life 100 days, two session per user,
+   30 minutes idle, no failed login attempts
 CREATE PROFILE development LIMIT
 PASSWORD_LIFE_TIME              100
 SESSIONS_PER_USER               2
 IDLE_TIME                       30
 FAILED_LOGIN_ATTEMPTS           UNLIMITED;
 
-7-
+
+7- Create 4 users, assign them the tablespace "hospital_bills";
+   profiles created should be used for the users,
+   all the users should be allow to connect to the database
 --Consultar usuarios
 SELECT * FROM SYS.DBA_USERS;
 
@@ -90,11 +97,11 @@ IDENTIFIED BY user4
 DEFAULT tablespace hospital_bills
 PROFILE development;
 
---all the users should be allow to connect to the database
+--Permitir conectarse a la BD con todos los usuarios
 GRANT CREATE SESSION TO USER1, USER2, USER3, USER4;
 
 
-8-
+8- Lock the users associate with profiles: manager and finance
 ALTER USER USER1 ACCOUNT LOCK;
 ALTER USER USER2 ACCOUNT LOCK;
 
