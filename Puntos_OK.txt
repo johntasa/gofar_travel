@@ -40,3 +40,29 @@ SELECT * FROM SYS.DBA_USERS;
 5- Assign the dba role and permissions to connect to the user just created
 GRANT DBA TO DBA_JOHNTASA;
 GRANT CREATE SESSION TO DBA_JOHNTASA;
+
+6-
+-- Consultar perfiles
+SELECT * FROM DBA_PROFILES;
+
+a-
+CREATE PROFILE manager LIMIT
+PASSWORD_LIFE_TIME              40
+SESSIONS_PER_USER               1
+IDLE_TIME                       15
+FAILED_LOGIN_ATTEMPTS           4;
+
+b-
+CREATE PROFILE finance LIMIT
+PASSWORD_LIFE_TIME              15
+SESSIONS_PER_USER               1
+IDLE_TIME                       3
+FAILED_LOGIN_ATTEMPTS           2;
+
+c-
+CREATE PROFILE development LIMIT
+PASSWORD_LIFE_TIME              100
+SESSIONS_PER_USER               2
+IDLE_TIME                       30
+FAILED_LOGIN_ATTEMPTS           UNLIMITED;
+
