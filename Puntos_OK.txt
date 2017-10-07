@@ -108,3 +108,11 @@ ALTER USER USER2 ACCOUNT LOCK;
 --Consultar usuarios
 SELECT * FROM SYS.DBA_USERS;
 
+
+9- Delete the tablespace called "test_purposes"
+--Eliminar únicamente el TABLESPACE 'test_purposes' 
+DROP TABLESPACE test_purposes; 
+
+--Eliminar el TABLESPACE con el contenido y DATAFILES
+DROP TABLESPACE test_purposes 
+INCLUDING CONTENTS AND DATAFILES;
