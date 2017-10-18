@@ -9,7 +9,7 @@ CREATE TABLESPACE hospital_bills DATAFILE
 
 b. second one with 500 Mb and 1 datafile, named "test_purposes"
 --TABLESPACE test_purposes
-CREATE TABLESPACE test_purposes DATAFILE 
+CREATE TABLESPACE test_purposes DATAFILE ,
 'C:\Users\user\Desktop\Taller1\datafile4.DBF' SIZE 500M;
 
 c. Undo tablespace with 5Mb of space and 1 datafile
